@@ -1,5 +1,5 @@
 {
-  "name": "socketio-memoryleak-test_0.9",
+  "name": "socketio-memoryleak-test_001_0.9",
   "version": "0.0.0",
   "description": "",
   "main": "app.js",
@@ -9,9 +9,11 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
-  "dependencies": {
+  "devDependencies": {
+    "argv": "0.0.2",
     "socket.io": "0.9.17",
-    "socket.io-client": "0.9.17"
-  }
+    "socket.io-client": "0.9.17",
+    "underscore": "~1.6.0"
+  },
+  "dependencies": {}
 }

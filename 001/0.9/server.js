@@ -1,12 +1,17 @@
-var io = require('socket.io').listen(9800);
-io.set("log level", 1);
+var argv = require('argv');
+var args = argv.option([
+  { name: 'port', short: 'p', type: 'int' }
+]).run();
 
+var port = args.options.port  || 4000;
+var io = require('socket.io').listen(port);
+
+io.set("log level", 1);
 io.sockets.on('connection', function(socket) {
   console.log('connected: '+ socket.id);
 
   socket.on('message', function(data) {
-    //console.log('message: '+ socket.id +" : "+ data);
-    console.log('message: '+ socket.id);
+    //console.log('message: '+ socket.id);
 
     io.sockets.emit('message', data);
   });
