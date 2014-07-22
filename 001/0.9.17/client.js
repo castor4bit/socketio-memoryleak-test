@@ -15,7 +15,8 @@ var data_size     = args.options.data_size    || 2000;
 
 var io = require('socket.io-client');
 var options = {
-  forceNew: true
+  'force new connection': true,
+  port: port
 };
 var data = "";
 for (var i=0; i<data_size; i++) {
@@ -29,10 +30,10 @@ var Client = function() {
 
   return {
     connect: function(host, options) {
-      socket = io('http://'+ host +":"+ port, options);
+      socket = io.connect('http://'+ host, options);
 
       socket.on('connect', function() {
-        id = socket.io.engine.id;
+        id = socket.socket.sessionid;
         console.log('connected: '+ id);
 
         socket.on('message', function(data) {

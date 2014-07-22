@@ -10,7 +10,7 @@ var args = argv.option([
 
 var port          = args.options.port         || 4000;
 var host          = args.options.host         || 'localhost';
-var client_num    = args.options.clients      || 10;
+var client_num    = args.options.clients      || 100;
 var data_size     = args.options.data_size    || 2000;
 
 var io = require('socket.io-client');
@@ -55,8 +55,8 @@ var Client = function() {
     },
     onConnect: function() {},
     onMessage: function() {}
-  }
-}
+  };
+};
 
 // initialize clients
 var clients = [];
@@ -84,7 +84,7 @@ var reset = function() {
     clients[i].onMessage = onMessage;
   }
   main();
-}
+};
 
 // main
 var main = function() {
@@ -101,7 +101,7 @@ var main = function() {
     clients[idx].sendMessage(data);
     idx++;
   }, wait);
-}
+};
 
 // execute
 var onConnect = _.after(client_num, main);
