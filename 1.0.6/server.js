@@ -21,9 +21,10 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
+var count = 0;
 setInterval(function() {
   if (global.gc) {
     global.gc();
   }
-  console.log(process.memoryUsage());
-}, 5000);
+  console.log(++count, process.memoryUsage());
+}, 3000);
