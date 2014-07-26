@@ -39,13 +39,8 @@ var Client = function() {
         id = socket.io.engine.id;
         debug('connected: '+ id);
 
-        socket.on('message', function(data) {
-          debug('message: '+ id);
-          self.onMessage();
-        });
         socket.on('disconnect', function() {
           debug('disconnected');
-          self.onDisconnect();
         });
 
         self.onConnect();
@@ -57,12 +52,7 @@ var Client = function() {
     getId: function() {
       return id;
     },
-    sendMessage: function(data) {
-      socket.emit("message", data);
-    },
-    onConnect: function() {},
-    onMessage: function() {},
-    onDisconnect: function() {}
+    onConnect: function() {}
   };
 };
 
@@ -73,50 +63,17 @@ var init = function() {
 
   var i;
   var client;
-  var onConnect     = _.after(client_num, main);
-  var onMessage     = _.after(client_num * client_num, reset);
-  var onDisconnect  = _.after(client_num, init);
-
-  for (i = 0; i < clients.length; i++) {
-    clients[i] = null;
-  }
-  clients = [];
+  var onConnect = function() {
+    this.disconnect();
+  };
 
   for (i = 0; i < client_num; i++) {
     client = new Client();
     client.onConnect = onConnect;
-    client.onMessage = onMessage;
-    client.onDisconnect = onDisconnect;
     client.connect(host, options);
 
     clients.push(client);
   }
-};
-
-// reset
-var reset = function() {
-  debug("----------------- reset ----------------");
-
-  for (var i = 0; i < clients.length; i++) {
-    clients[i].disconnect();
-  }
-};
-
-// main
-var main = function() {
-  debug("----------------- main ----------------");
-
-  var idx = 0;
-  var wait = 1000 / client_num;
-  var timer = setInterval(function() {
-    if (idx >= client_num) {
-      clearInterval(timer);
-      return;
-    }
-    debug("send message: "+ idx);
-    clients[idx].sendMessage(data);
-    idx++;
-  }, wait);
 };
 
 // execute

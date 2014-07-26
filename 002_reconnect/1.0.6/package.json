@@ -12,6 +12,7 @@
   "devDependencies": {
     "argv": "0.0.2",
     "debug": "^1.0.4",
+    "heapdump": "^0.2.9",
     "socket.io": "^1.0.6",
     "socket.io-client": "^1.0.6",
     "underscore": "~1.6.0"
