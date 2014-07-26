@@ -1,0 +1,21 @@
+{
+  "name": "socketio-memoryleak-test",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "argv": "0.0.2",
+    "debug": "^1.0.4",
+    "mongoose": "^3.8.13",
+    "socket.io": "0.9.16",
+    "socket.io-client": "0.9.16",
+    "underscore": "~1.6.0"
+  },
+  "dependencies": {}
+}
